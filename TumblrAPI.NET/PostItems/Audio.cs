@@ -37,9 +37,10 @@ namespace TumblrAPI.PostItems
 		{
 			var parameters = new Dictionary<string, string> 
 			{
-				{PostItemParameters.Type, PostItemType.Audio},
-				{PostItemParameters.Caption, Caption},
+				{ PostItemParameters.Type, PostItemType.Audio },
+				{ PostItemParameters.Caption, Caption },
 			};
+
 			if (string.IsNullOrEmpty(ExternallyHostedUrl) && !string.IsNullOrEmpty(FilePath))
 			{
 				parameters.Add(PostItemParameters.Data, FilePath);
@@ -48,6 +49,7 @@ namespace TumblrAPI.PostItems
 			{
 				parameters.Add(PostItemParameters.Source, ExternallyHostedUrl);
 			}
+
 			return parameters;
 		}
 	}

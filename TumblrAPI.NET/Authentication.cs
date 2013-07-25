@@ -1,21 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+
 using TumblrAPI.Properties;
 
 namespace TumblrAPI
 {
 	public class Authentication
 	{
-		internal static string Email{get;private set;}
-		internal static string Password{get;private set;}
+		internal static string Email { get; private set; }
+		internal static string Password { get; private set; }
 		public static AuthenticationStatus Status { get; set; }
 
 		public static AuthenticationStatus Authenticate(string email, string password)
 		{
 			Email = email;
 			Password = password;
-			var authRequest = new HttpHelper(
+			HttpHelper authRequest = new HttpHelper(
 				Settings.Default.API_URL,
 				new Dictionary<string, string>
 				{
@@ -23,11 +25,14 @@ namespace TumblrAPI
 					{ PostItemParameters.Password, Password },
 					{ PostItemParameters.Action, "authenticate" }
 				});
-			var result = authRequest.Post();
+
+			TumblrResult result = authRequest.Post();
 			ParseRequest(result.Message);
-			Status = result.PostStatus == PostStatus.Created
-				? Status = AuthenticationStatus.Valid
-				: Status = AuthenticationStatus.Invalid;
+
+			Status = (result.PostStatus == PostStatus.Created)
+				? AuthenticationStatus.Valid
+				: AuthenticationStatus.Invalid;
+
 			return Status;
 		}
 
@@ -36,8 +41,7 @@ namespace TumblrAPI
 			var userInfo = new UserInformation();
 			using (XmlReader reader = XmlReader.Create(new StringReader(xmlResponse)))
 			{
-				var ws = new XmlWriterSettings();
-				ws.Indent = true;
+				var ws = new XmlWriterSettings { Indent = true };
 				while (reader.Read())
 				{
 					if (reader.NodeType == XmlNodeType.Element && reader.HasAttributes)
@@ -113,7 +117,7 @@ namespace TumblrAPI
 								case "backup-post-limit":
 									userInfo.TumblrLog.BackUpPostLimit = ParseInt(reader.Value);
 									break;
-							} 
+							}
 							#endregion
 						}
 					}
@@ -125,7 +129,9 @@ namespace TumblrAPI
 		private static bool ParseBool(string str)
 		{
 			if (str.ToLowerInvariant() == "yes")
+			{
 				return true;
+			}
 
 			int value = ParseInt(str);
 			return value == 1;
@@ -134,14 +140,14 @@ namespace TumblrAPI
 		private static int ParseInt(string str)
 		{
 			int value;
-			int.TryParse(str, out value);
+			Int32.TryParse(str, out value);
 			return value;
 		}
 
 		private static long ParseLong(string str)
 		{
 			long value;
-			long.TryParse(str, out value);
+			Int64.TryParse(str, out value);
 			return value;
 		}
 	}

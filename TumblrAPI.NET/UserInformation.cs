@@ -6,6 +6,7 @@
 		{
 			TumblrLog = new TumblrLog();
 		}
+
 		public string DefaultPostFormat { get; set; }
 		public bool CanUploadAudio { get; set; }
 		public bool CanUploadAiff { get; set; }

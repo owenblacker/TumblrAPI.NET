@@ -4,19 +4,13 @@ namespace TumblrAPI.PostItems
 {
 	public class Video : PostItemBase
 	{
-		public Video()
-		{
-		}
+		public Video() { }
 
 		public Video(string embed)
-			: this(embed, null, null)
-		{
-		}
+			: this(embed, null, null) { }
 
 		public Video(string embed, string title)
-			: this(embed, title, null)
-		{
-		}
+			: this(embed, title, null) { }
 
 		public Video(string embed, string title, string caption)
 		{
@@ -67,6 +61,7 @@ namespace TumblrAPI.PostItems
 				{ PostItemParameters.Title, Title },
 				{ PostItemParameters.Caption, Caption },
 			};
+
 			if (string.IsNullOrEmpty(Embed) && !string.IsNullOrEmpty(FilePath))
 			{
 				parameters.Add(PostItemParameters.Data, FilePath);
@@ -75,6 +70,7 @@ namespace TumblrAPI.PostItems
 			{
 				parameters.Add(PostItemParameters.Source, Embed);
 			}
+
 			return parameters;
 		}
 	}

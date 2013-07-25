@@ -4,14 +4,10 @@ namespace TumblrAPI.PostItems
 {
 	public class Chat : PostItemBase
 	{
-		public Chat()
-		{
-		}
+		public Chat() { }
 
-		public Chat(string converstation)
-			: this(converstation, null)
-		{
-		}
+		public Chat(string conversation)
+			: this(conversation, null) { }
 
 		public Chat(string conversation, string title)
 		{
@@ -40,7 +36,7 @@ namespace TumblrAPI.PostItems
 			return new Dictionary<string, string>
 			{
 				{ PostItemParameters.Type, PostItemType.Conversation },
-				{ PostItemParameters.Title , Title },
+				{ PostItemParameters.Title, Title },
 				{ PostItemParameters.Conversation, ConversationText }
 			};
 		}

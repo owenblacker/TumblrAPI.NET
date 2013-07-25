@@ -71,6 +71,8 @@
     <Compile Include="Enums\AuthenticationStatus.cs" />
     <Compile Include="Enums\PostStatus.cs" />
     <Compile Include="Enums\PostItemType.cs" />
+    <Compile Include="FileParameter.cs" />
+    <Compile Include="FormUpload.cs" />
     <Compile Include="PostItems\Audio.cs" />
     <Compile Include="TumblrResult.cs" />
     <Compile Include="PostItems\Chat.cs" />

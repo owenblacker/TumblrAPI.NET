@@ -4,14 +4,10 @@ namespace TumblrAPI.PostItems
 {
 	public class Quote : PostItemBase
 	{
-		public Quote()
-		{
-		}
+		public Quote() { }
 
 		public Quote(string quoteText)
-			: this(quoteText, null)
-		{
-		}
+			: this(quoteText, null) { }
 
 		public Quote(string quoteText, string source)
 		{

@@ -4,19 +4,13 @@ namespace TumblrAPI.PostItems
 {
 	public class Link : PostItemBase
 	{
-		public Link()
-		{
-		}
+		public Link() { }
 
 		public Link(string url)
-			: this(url, null, null)
-		{
-		}
+			: this(url, null, null) { }
 
 		public Link(string url, string name)
-			: this(url, name, null)
-		{
-		}
+			: this(url, name, null) { }
 
 		public Link(string url, string name, string description)
 		{

@@ -7,14 +7,10 @@ namespace TumblrAPI.PostItems
 	/// </summary>
 	public class Text : PostItemBase
 	{
-		public Text()
-		{
-		}
+		public Text() { }
 
 		public Text(string title)
-			: this(title, null)
-		{
-		}
+			: this(title, null) { }
 
 		public Text(string title, string body)
 		{

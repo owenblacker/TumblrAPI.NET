@@ -4,19 +4,13 @@ namespace TumblrAPI.PostItems
 {
 	public class Photo : PostItemBase
 	{
-		public Photo()
-		{
+		public Photo() { }
 
-		}
 		public Photo(string source)
-			: this(source, null, null)
-		{
-		}
+			: this(source, null, null) { }
 
 		public Photo(string source, string caption)
-			: this(source, caption, null)
-		{
-		}
+			: this(source, caption, null) { }
 
 		public Photo(string source, string caption, string clickThroughUrl)
 		{
@@ -66,10 +60,11 @@ namespace TumblrAPI.PostItems
 		{
 			var parameters = new Dictionary<string, string> 
 			{
-				{PostItemParameters.Type, PostItemType.Photo},
-				{PostItemParameters.Caption, Caption},
-				{PostItemParameters.ClickThroughUrl, ClickThroughUrl},
+				{ PostItemParameters.Type, PostItemType.Photo },
+				{ PostItemParameters.Caption, Caption },
+				{ PostItemParameters.ClickThroughUrl, ClickThroughUrl },
 			};
+
 			if (string.IsNullOrEmpty(Source) && !string.IsNullOrEmpty(FilePath))
 			{
 				parameters.Add(PostItemParameters.Data, FilePath);
@@ -78,6 +73,7 @@ namespace TumblrAPI.PostItems
 			{
 				parameters.Add(PostItemParameters.Source, Source);
 			}
+
 			return parameters;
 		}
 	}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using TumblrAPI.Properties;
 
 namespace TumblrAPI.PostItems
@@ -22,10 +23,11 @@ namespace TumblrAPI.PostItems
 		/// </summary>
 		public TumblrResult Publish()
 		{
-			if (TumblrAPI.Authentication.Status == AuthenticationStatus.Valid)
+			if (Authentication.Status == AuthenticationStatus.Valid)
 			{
 				return Publish(Authentication.Email, Authentication.Password, "");
 			}
+
 			throw new InvalidOperationException(
 				"You are not authenticated.  You can call the Connect method or the Publish method and pass in your credentials.");
 		}
@@ -41,17 +43,23 @@ namespace TumblrAPI.PostItems
 			postItems.Add(PostItemParameters.Email, email);
 			postItems.Add(PostItemParameters.Password, password);
 			postItems.Add(PostItemParameters.Generator, "TumblrAPI.NET");
-            if (!string.IsNullOrEmpty(group)) postItems.Add(PostItemParameters.Group, group);
 
-			var request = new HttpHelper(Settings.Default.API_URL, postItems);
+            if (!String.IsNullOrEmpty(group))
+            {
+            	postItems.Add(PostItemParameters.Group, group);
+            }
 
-			var result = request.Post();
+			HttpHelper request = new HttpHelper(Settings.Default.API_URL, postItems);
+
+			TumblrResult result = request.Post();
+
 			int postId;
 			if (result.PostStatus == PostStatus.Created
-				&& int.TryParse(result.Message, out postId))
+				&& Int32.TryParse(result.Message, out postId))
 			{
 				PostId = postId;
 			}
+
 			return result;
 		}
 	}
